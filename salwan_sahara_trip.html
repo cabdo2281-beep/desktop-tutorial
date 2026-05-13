@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="description" content="Experience the beauty of the Sahara Desert with our guided tours and unforgettable adventures.">
+  <meta name="keywords" content="Sahara Desert, guided tours, desert adventures, Salwan Sahara trip, Morocco travel, desert excursions, quad biking, camel rides, desert camping">
+  <meta name="author" content="abdessalam chlikhi">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <title>Salwan Sahara Trip — Desert Adventures</title>
+  <link rel="stylesheet" href="salwan sahara trip.css"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold:        #d4932a;
+      --gold-light:  #e8b86d;
+      --sand:        #f2e4c8;
+      --sand-dark:   #e0c99a;
+      --dune:        #c4a876;
+      --earth:       #8b5e3c;
+      --night:       #0e0b07;
+      --night-mid:   #1c1509;
+      --night-soft:  #2a1f0e;
+      --off-white:   #fdf8f0;
+      --rust:        #b84a1e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--night);
+      color: var(--off-white);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor {
+      position: fixed; z-index: 9999;
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      position: fixed; z-index: 9998;
+      width: 36px; height: 36px;
+      border: 1.5px solid rgba(212,147,42,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease-out, width 0.3s, height 0.3s;
+    }
+    body:hover .cursor { opacity: 1; }
+
+    /* ── SAND TEXTURE OVERLAY ── */
+    .grain {
+      position: fixed; inset: 0; z-index: 1;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='https://i.pinimg.com/736x/f9/64/d6/f964d653f7e35da853afc3836d618147.jpg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 1.6rem 5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.5s, padding 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(14,11,7,0.92);
+      backdrop-filter: blur(16px);
+      padding: 1rem 5rem;
+      border-bottom: 1px solid rgba(212,147,42,0.15);
+    }
+    .nav-logo {
+      display: flex; flex-direction: column; line-height: 1;
+      text-decoration: none;
+    }
+    .nav-logo-top {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+    .nav-logo-sub {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--dune);
+      margin-top: 2px;
+    }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(253,248,240,0.65);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-btn {
+      padding: 0.65rem 1.6rem;
+      background: var(--gold);
+      color: var(--night);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 1px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .nav-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      height: 100vh; min-height: 750px;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 0 5rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(14,11,7,0.85) 40%, rgba(14,11,7,0.2) 100%),
+        url('https://i.pinimg.com/736x/f9/64/d6/f964d653f7e35da853afc3836d618147.jpg') center/cover no-repeat;
+      animation: driftbg 20s ease-in-out infinite alternate;
+    }
+    @keyframes driftbg {
+      from { transform: scale(1) translateX(0); }
+      to   { transform: scale(1.06) translateX(-20px); }
+    }
+
+    /* Dune silhouette SVG at bottom */
+    .hero-dunes {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      z-index: 2; pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 3; max-width: 700px; }
+
+    .hero-label {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 1.6rem;
+      opacity: 0; animation: up 0.8s 0.2s forwards;
+    }
+    .hero-label-line { width: 36px; height: 1px; background: var(--gold); }
+    .hero-label span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 8vw, 8rem);
+      font-weight: 700;
+      line-height: 0.92;
+      color: var(--off-white);
+      margin-bottom: 0.4rem;
+      opacity: 0; animation: up 0.9s 0.35s forwards;
+    }
+    .hero-title-italic {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 0.95;
+      color: var(--gold);
+      margin-bottom: 2.2rem;
+      opacity: 0; animation: up 0.9s 0.5s forwards;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(253,248,240,0.7);
+      max-width: 440px;
+      margin-bottom: 3rem;
+      opacity: 0; animation: up 0.9s 0.65s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1.2rem; align-items: center;
+      opacity: 0; animation: up 0.9s 0.8s forwards;
+    }
+    .btn-gold {
+      display: inline-block;
+      padding: 1rem 2.4rem;
+      background: var(--gold);
+      color: var(--night);
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; border-radius: 1px;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      color: rgba(253,248,240,0.65);
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .btn-ghost:hover { color: var(--gold); }
+    .btn-ghost svg { transition: transform 0.3s; }
+    .btn-ghost:hover svg { transform: translateX(4px); }
+
+    /* compass rose top-right */
+    .hero-compass {
+      position: absolute; top: 50%; right: 5rem;
+      transform: translateY(-50%);
+      z-index: 3;
+      opacity: 0; animation: fadeIn 1s 1s forwards;
+    }
+    .compass-ring {
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,147,42,0.3);
+      display: flex; align-items: center; justify-content: center;
+      animation: spin 30s linear infinite;
+    }
+    .compass-inner {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      border: 1px dashed rgba(212,147,42,0.2);
+      display: flex; align-items: center; justify-content: center;
+      animation: spin-r 30s linear infinite;
+      flex-direction: column; gap: 2px;
+    }
+    .compass-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+    }
+    .compass-label {
+      font-size: 0.5rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--dune);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin-r { to { transform: rotate(-360deg); } }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes up {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* hero stats bar */
+    .hero-stats {
+      position: absolute; bottom: 6rem; right: 5rem;
+      z-index: 3;
+      display: flex; flex-direction: column; gap: 1.4rem; align-items: flex-end;
+      opacity: 0; animation: fadeIn 1s 1.1s forwards;
+    }
+    .stat-item { text-align: right; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.62rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(253,248,240,0.45);
+    }
+    .stat-divider { width: 1px; height: 40px; background: rgba(212,147,42,0.2); align-self: flex-end; }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--gold);
+      padding: 0.75rem 0;
+      overflow: hidden;
+    }
+    .ticker-track {
+      display: flex;
+      animation: ticker 25s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .ticker-item {
+      display: inline-flex; align-items: center; gap: 1rem;
+      padding: 0 2rem;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--night);
+    }
+    .ticker-sep { font-size: 1rem; opacity: 0.4; }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 8rem 5rem;
+      background: var(--night-mid);
+      position: relative;
+      overflow: hidden;
+    }
+    .services::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,147,42,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .section-header { margin-bottom: 4rem; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .section-tag::before {
+      content: '';
+      display: block; width: 28px; height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
+      font-weight: 700; line-height: 1.1;
+      color: var(--off-white);
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      position: relative;
+      padding: 3.5rem 2.8rem;
+      background: rgba(253,248,240,0.025);
+      border: 1px solid rgba(212,147,42,0.08);
+      overflow: hidden;
+      transition: background 0.4s, border-color 0.4s;
+      cursor: none;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(212,147,42,0.06), transparent);
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .service-card:hover { background: rgba(253,248,240,0.04); border-color: rgba(212,147,42,0.25); }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 56px; height: 56px;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .service-icon img { width: 100%; height: 100%; object-fit: contain; filter: sepia(1) saturate(3) hue-rotate(5deg) brightness(0.9); }
+    .service-icon-bg {
+      position: absolute; inset: -8px;
+      border-radius: 50%;
+      background: rgba(212,147,42,0.08);
+    }
+
+    /* SVG icons inline */
+    .svc-icon {
+      width: 48px; height: 48px;
+      stroke: var(--gold); fill: none;
+      stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .service-num {
+      position: absolute; top: 2.5rem; right: 2.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 700;
+      color: rgba(212,147,42,0.07); line-height: 1;
+      transition: color 0.4s;
+    }
+    .service-card:hover .service-num { color: rgba(212,147,42,0.13); }
+
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--off-white);
+      margin-bottom: 0.8rem;
+    }
+    .service-desc {
+      font-size: 0.88rem; font-weight: 300;
+      line-height: 1.85;
+      color: rgba(253,248,240,0.5);
+    }
+    .service-arrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .service-card:hover .service-arrow { opacity: 1; }
+
+    /* ── WHY US ── */
+    .why {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 650px;
+    }
+    .why-visual {
+      position: relative; overflow: hidden;
+      background: url('https://morocco-sahara-tours.com/images/zslide.jpg') center/cover no-repeat;
+    }
+    .why-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--night-soft));
+    }
+    .why-badge {
+      position: absolute; bottom: 3rem; left: 3rem;
+      background: var(--gold);
+      color: var(--night);
+      padding: 1.4rem 2rem;
+      border-radius: 1px;
+    }
+    .why-badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 700; line-height: 1;
+    }
+    .why-badge-text {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+    .why-content {
+      background: var(--night-soft);
+      padding: 6rem 5rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .why-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0; }
+    .why-item {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid rgba(212,147,42,0.1);
+      transition: padding-left 0.3s;
+    }
+    .why-item:hover { padding-left: 0.6rem; }
+    .why-item:first-child { border-top: 1px solid rgba(212,147,42,0.1); }
+    .why-check {
+      width: 32px; height: 32px; flex-shrink: 0;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .why-check svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 2.5; stroke-linecap: round; }
+    .why-item-title {
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--off-white); margin-bottom: 0.3rem;
+    }
+    .why-item-desc {
+      font-size: 0.83rem; font-weight: 300;
+      line-height: 1.7; color: rgba(253,248,240,0.5);
+    }
+
+    /* ── GALLERY ── */
+    .gallery { padding: 7rem 5rem; background: var(--night); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 1.2fr;
+      grid-template-rows: 280px 200px;
+      gap: 10px;
+      margin-top: 3.5rem;
+    }
+    .gallery-item {
+      position: relative; overflow: hidden; border-radius: 2px;
+    }
+    .gallery-item:nth-child(1) { grid-row: 1 / 3; }
+    .gallery-item:nth-child(4) { grid-row: 1 / 3; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.7s ease, filter 0.5s;
+    }
+    .gallery-item:hover img { transform: scale(1.08); filter: brightness(0.8); }
+    .gallery-item-label {
+      position: absolute; bottom: 1rem; left: 1rem;
+      background: rgba(14,11,7,0.7);
+      backdrop-filter: blur(8px);
+      padding: 0.35rem 0.8rem;
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); border-radius: 1px;
+      opacity: 0; transition: opacity 0.4s;
+    }
+    .gallery-item:hover .gallery-item-label { opacity: 1; }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 8rem 5rem;
+      background: var(--night-mid);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 7rem; align-items: start;
+    }
+    .contact-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 700; line-height: 1.15;
+      color: var(--off-white); margin-bottom: 1.5rem;
+    }
+    .contact-tagline em { font-style: italic; color: var(--gold); }
+    .contact-sub {
+      font-size: 0.9rem; font-weight: 300;
+      line-height: 1.8; color: rgba(253,248,240,0.5);
+      margin-bottom: 3rem;
+    }
+    .contact-details { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-detail {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .detail-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      border: 1px solid rgba(212,147,42,0.3);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .detail-icon svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; }
+    .detail-text { font-size: 0.9rem; color: rgba(253,248,240,0.7); }
+    .detail-text strong { color: var(--off-white); display: block; font-weight: 500; margin-bottom: 1px; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field label {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--dune);
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: rgba(253,248,240,0.04);
+      border: 1px solid rgba(212,147,42,0.2);
+      color: var(--off-white);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem; font-weight: 300;
+      padding: 0.85rem 1.1rem;
+      border-radius: 1px;
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+      appearance: none;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--gold);
+      background: rgba(212,147,42,0.05);
+    }
+    .form-field select option { background: var(--night-mid); }
+    .form-field textarea { resize: none; height: 110px; }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: rgba(253,248,240,0.25); }
+    .form-submit {
+      padding: 1.1rem 2.5rem;
+      background: var(--gold);
+      color: var(--night);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      border: none; border-radius: 1px;
+      cursor: none; transition: background 0.3s, transform 0.2s;
+      align-self: flex-start;
+    }
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--night);
+      border-top: 1px solid rgba(212,147,42,0.12);
+      padding: 4rem 5rem 2.5rem;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 5rem; margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(212,147,42,0.08);
+    }
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 700;
+      color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .footer-brand-sub {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--dune); margin-bottom: 1.2rem;
+    }
+    .footer-brand p {
+      font-size: 0.85rem; font-weight: 300;
+      line-height: 1.8; color: rgba(253,248,240,0.4);
+      max-width: 260px;
+    }
+    .footer-col h4 {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.4rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-col ul li a {
+      font-size: 0.85rem; font-weight: 300;
+      color: rgba(253,248,240,0.4); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.73rem; color: rgba(253,248,240,0.25);
+    }
+    .footer-socials { display: flex; gap: 1.5rem; }
+    .footer-socials a {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(253,248,240,0.3); text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-socials a:hover { color: var(--gold); }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      nav { padding: 1.2rem 2rem; }
+      nav.scrolled { padding: 0.9rem 2rem; }
+      .nav-links { display: none; }
+      .hero { padding: 0 2rem; }
+      .hero-compass, .hero-stats { display: none; }
+      .services { padding: 5rem 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why { grid-template-columns: 1fr; }
+      .why-content { padding: 4rem 2rem; }
+      .gallery { padding: 5rem 2rem; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-row: auto; }
+      .contact { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      footer { padding: 3rem 2rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-top">Salwan Sahara</span>
+      <span class="nav-logo-sub">Trip Agency</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">About Us</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-btn">Book Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <!-- Dune silhouette -->
+    <svg class="hero-dunes" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 Q180,20 360,70 Q540,120 720,50 Q900,-10 1080,60 Q1260,120 1440,40 L1440,120 L0,120 Z" fill="#0e0b07"/>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="hero-label-line"></span>
+        <span>Sahara Desert · Morocco</span>
+      </div>
+      <h1 class="hero-title">Discover the</h1>
+      <p class="hero-title-italic">Golden Sands</p>
+      <p class="hero-desc">Quads, paintball, desert trips, guided tours & cosy stays — Salwan Sahara Trip crafts unforgettable adventures at the heart of the Moroccan desert.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-gold">Explore Services</a>
+        <a href="#contact" class="btn-ghost">
+          Book an Adventure
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-compass">
+      <div class="compass-ring">
+        <div class="compass-inner">
+          <span class="compass-n">N</span>
+          <span class="compass-label">Navigate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Happy Travellers</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Services</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Quad Rental <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Apartment Rental <span class="ticker-sep">✦</span></span>  
+      <span class="ticker-item">Paintball <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Tourist Transport <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Guided Tours <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Desert Trips <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Quad Rental <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Apartment Rental <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Paintball <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Tourist Transport <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Guided Tours <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Desert Trips <span class="ticker-sep">✦</span></span>
+      <span class="ticker-item">Car Rental <span class="ticker-sep">✦</span></span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-header reveal">
+      <p class="section-tag">What We Offer</p>
+      <h2 class="section-title">Our <em>Services</em></h2>
+    </div>
+    <div class="services-grid">
+
+      <!-- Quad -->
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-icon" style="margin-bottom:1.8rem">
+          <svg class="svc-icon" viewBox="0 0 24 24"><circle cx="6" cy="17" r="2"/><circle cx="18" cy="17" r="2"/><path d="M3 17h1M19 17h2M8 17h8M4 10l2-5h8l3 5"/><path d="M14 5l1 5M6 10h12"/></svg>
+        </div>
+        <h3 class="service-name">Quad Rental</h3>
+        <p class="service-desc">Tear through the dunes on our fleet of powerful quads. All skill levels welcome — beginners and pros alike. Helmets and safety gear included.</p>
+        <a href="#contact" class="service-arrow">
+          Book a Quad →
+        </a>
+      </div>
+
+      <!-- Apartment -->
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <div class="service-icon" style="margin-bottom:1.8rem">
+          <svg class="svc-icon" viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        </div>
+        <h3 class="service-name">Apartment Rental</h3>
+        <p class="service-desc">Comfortable, fully-equipped apartments in the heart of the region. Rest well between adventures — clean, private and close to all activities.</p>
+        <a href="#contact" class="service-arrow">
+          View Availability →
+        </a>
+      </div>
+   <!-- cars -->
+<div class="service-card reveal">
+  <div class="service-num">03</div>
+  <div class="service-icon" style="margin-bottom:1.8rem">
+    <svg class="svc-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M3 13l1-3h16l1 3H3zm2 5a1 1 0 110-2 1 1 0 010 2zm14 0a1 1 0 110-2 1 1 0 010 2zM5 10l1.5-4.5h11L19 10H5z"/>
+    </svg>
+  </div>
+  <h3 class="service-name">Cars Rental</h3>
+  <p class="service-desc">
+    Comfortable, fully-equipped cars ready for every journey. Drive with ease between adventures — clean, private, and conveniently located close to all activities.
+  </p>
+  <a href="#contact" class="service-arrow">
+    View Availability →
+  </a>
+</div>
+
+      <!-- Paintball -->
+      <div class="service-card reveal">
+        <div class="service-num">04</div>
+        <div class="service-icon" style="margin-bottom:1.8rem">
+          <svg class="svc-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+        </div>
+        <h3 class="service-name">Paintball</h3>
+        <p class="service-desc">An adrenaline-packed paintball experience in an open desert setting. Perfect for groups, team-building, and unforgettable birthday adventures.</p>
+        <a href="#contact" class="service-arrow">
+          Book a Match →
+        </a>
+      </div>
+
+      <!-- Transport -->
+      <div class="service-card reveal">
+        <div class="service-num">05</div>
+        <div class="service-icon" style="margin-bottom:1.8rem">
+          <svg class="svc-icon" viewBox="0 0 24 24"><rect x="1" y="6" width="22" height="13" rx="2"/><path d="M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><circle cx="7" cy="16" r="1.5"/><circle cx="17" cy="16" r="1.5"/></svg>
+        </div>
+        <h3 class="service-name">Tourist Transport</h3>
+        <p class="service-desc">Safe, reliable and comfortable transport across the region. Airport pickups, inter-city transfers, and private day-trip shuttles — we handle the driving.</p>
+        <a href="#contact" class="service-arrow">
+          Request Transport →
+        </a>
+      </div>
+
+      <!-- Trips -->
+      <div class="service-card reveal">
+        <div class="service-num">06</div>
+        <div class="service-icon" style="margin-bottom:1.8rem">
+          <svg class="svc-icon" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="6" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        </div>
+        <h3 class="service-name">Tourist Trips</h3>
+        <p class="service-desc">Carefully curated excursions into the Sahara — from overnight dune camps to full multi-day desert circuits. Every trip is a story you'll tell forever.</p>
+        <a href="#contact" class="service-arrow">
+          See Itineraries →
+        </a>
+      </div>
+
+      <!-- Guidance -->
+      <div class="service-card reveal">
+        <div class="service-num">07</div>
+        <div class="service-icon" style="margin-bottom:1.8rem">
+          <svg class="svc-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <h3 class="service-name">Tourism Guidance</h3>
+        <p class="service-desc">Our expert local guides bring the desert to life — its history, culture, flora and hidden gems. Personalised tours with passionate storytellers at your side.</p>
+        <a href="#contact" class="service-arrow">
+          Meet Our Guides →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why" id="why">
+    <div class="why-visual">
+      <div class="why-badge">
+        <div class="why-badge-num">10+</div>
+        <div class="why-badge-text">Years in the Sahara</div>
+      </div>
+    </div>
+    <div class="why-content">
+      <p class="section-tag">Why Choose Us</p>
+      <h2 class="section-title">We know the<br/><em>desert.</em></h2>
+      <div class="why-list">
+        <div class="why-item reveal">
+          <div class="why-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">Born & Raised Locally</div>
+            <div class="why-item-desc">We're not tour operators from the city — the Sahara is our home. We know every dune, trail, and oasis by name.</div>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">Safety First, Always</div>
+            <div class="why-item-desc">All equipment is regularly serviced. Every activity includes full safety briefings and experienced supervision.</div>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">Tailored to You</div>
+            <div class="why-item-desc">Solo traveller, couple, or a group of 40 — we adapt every experience to your pace, preferences, and budget.</div>
+          </div>
+        </div>
+        <div class="why-item reveal">
+          <div class="why-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="why-item-title">One Agency, All Services</div>
+            <div class="why-item-desc">Accommodation, transport, activities, and guides — handle everything in one booking with one trusted team.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="section-header reveal">
+      <p class="section-tag">The Experience</p>
+      <h2 class="section-title">Life in the <em>Desert</em></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://cdn-s-www.lalsace.fr/images/F7B19261-5919-4D8E-BA26-59962B059906/NW_raw/depuis-le-maroc-il-est-egalement-possible-de-decouvrir-le-sahara-comme-on-l-imagine-avec-ses-dunes-a-perte-de-vue-deux-des-plus-beaux-sites-pour-plonger-dans-cette-ambiance-magique-se-situent-dans-la-region-de-l-erg-lihoudi-et-de-l-erg-chebbi-a-decouvrir-a-dos-de-dromadaire-a-l-est-du-pays-l-erg-de-chebbi-(photo)-est-accessible-en-5-heures-de-route-depuis-ouarzazate-photo-sergio-otoya-unsplash-1676458516.jpg" alt="Sahara dunes"/>
+        <span class="gallery-item-label">Sahara Dunes</span>
+      </div>
+      <div class="gallery-item">
+        <<img src="https://falcontourism.ae/desertsafaripromo/assets/images/bghrader.jpg" alt="Welcome to Falcon Tourism | Experience the Majestic Sands of Dubai ..." class="" tabindex="0" aria-label="Welcome to Falcon Tourism | Experience the Majestic Sands of Dubai ..." role="button">
+        <span class="gallery-item-label">Quad Adventure</span>
+      </div>
+      <div class="gallery-item">
+        <<img src="https://travelguide-marrakech.com/wp-content/uploads/2019/10/night-desert-camp-erg-chegaga.jpg" alt="Chegaga Desert Camp: 8 Unique Stays in the Erg Chigaga Dunes" class="" tabindex="0" aria-label="Chegaga Desert Camp: 8 Unique Stays in the Erg Chigaga Dunes" role="button" data-bm="145">
+        <span class="gallery-item-label">Desert Camp</span>
+      </div>
+      <div class="gallery-item">
+<img src="https://discoversaharatours.com/wp-content/uploads/2024/05/Choosing-Your-Sahara-Destination-in-Morocco-Pinterest-1-768x1152.png" alt="A Comprehensive Guide to Discovering the Sahara Desert in Morocco ..." class="" tabindex="0" aria-label="A Comprehensive Guide to Discovering the Sahara Desert in Morocco ..." role="button">        <span class="gallery-item-label">Scenic Routes</span>
+      </div>
+      <div class="gallery-item">
+<img src="https://img.freepik.com/premium-photo/sunset-sand-dunes-sahara-desert-morocco_675836-596.jpg" alt="Premium AI Image | Sunset over the sand dunes in the Sahara desert Morocco" class="" tabindex="0" aria-label="Premium AI Image | Sunset over the sand dunes in the Sahara desert Morocco" role="button">        <span class="gallery-item-label">Sunrise Tours</span>
+      </div>
+      <div class="gallery-item">
+<img src="https://www.moroccodesertstargazing.com/star-watching-2.jpg" alt="1 Night Stargazing Merzouga Camel Trip, Astro Night Andromeda Desert ..." class="" tabindex="0" aria-label="1 Night Stargazing Merzouga Camel Trip, Astro Night Andromeda Desert ..." role="button" style="position: absolute; height: 100%; width: 100%; inset: 0px; margin: auto;" data-bm="5">        <span class="gallery-item-label">Stargazing Nights</span>
+      </div>
+      <div class="gallery-item"></div>
+<video src="Video1 .mp4" controls></video>  
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-info reveal">
+      <p class="section-tag">Get in Touch</p>
+      <h2 class="contact-tagline">Your desert<br/>adventure <em>starts here.</em></h2>
+      <p class="contact-sub">Fill in the form and our team will get back to you within 24 hours to plan your perfect Sahara experience.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Phone / WhatsApp</strong>
+            0671230851
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Email</strong>
+            salwansaharatrip@GMAIL.com
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="detail-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div class="detail-text">
+            <strong>Location</strong>
+            Morocco Sahara Agadir, Marrakech, Essaouira, Smara, Laayoune, Edakhela, Merzouga, Shegaga,  & more
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-field">
+          <label>First Name</label>
+          <input type="text" placeholder="First Name"/>
+        </div>
+        <div class="form-field">
+          <label>Last Name</label>
+          <input type="text" placeholder="Last Name"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com"/>
+        </div>
+        <div class="form-field">
+          <label>Phone</label>
+          <input type="tel" placeholder="+213 ..."/>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Service Interested In</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Quad Rental</option>
+          <option>Apartment Rental</option>
+          <option>Car Rental</option>
+          <option>Paintball</option>
+          <option>Tourist Transport</option>
+          <option>Tourist Trips</option>
+          <option>Tourism Guidance</option>
+          <option>Multiple Services</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your group size, dates, and what you'd like to do..."></textarea>
+      </div>
+      <button type="button" class="form-submit">Send Message ✦</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Salwan Sahara Trip</div>
+        <div class="footer-brand-sub">Desert Tourism Agency · Morocco</div>
+        <p>Quads, paintball, guided tours, transport & stays — one agency, every Sahara adventure.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Quad Rental</a></li>
+          <li><a href="#services">Apartment Rental</a></li>
+          <li><a href="#services">Car Rental</a></li>
+          <li><a href="#services">Paintball</a></li>
+          <li><a href="#services">Tourist Transport</a></li>
+          <li><a href="#services">Tourist Trips</a></li>
+          <li><a href="#services">Tourism Guidance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#why">About Us</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact">Book Now</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Salwan Sahara Trip. All rights reserved.</span>
+      <div class="footer-socials">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+    function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+    document.querySelectorAll('a, button, .service-card, .gallery-item').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; ring.style.width = '56px'; ring.style.height = '56px'; });
+      el.addEventListener('mouseleave', () => { cursor.style.width = '12px'; cursor.style.height = '12px'; ring.style.width = '36px'; ring.style.height = '36px'; });
+    });
+
+    // Sticky nav
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 70));
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
